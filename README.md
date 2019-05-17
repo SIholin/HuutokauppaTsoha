@@ -4,4 +4,4 @@ Huutokaupassa tuotteita voi laittaa myyntiin, jonka jälkeen muut voivat halutes
 
 ## Dokumentaatio
 
-+ Tietokantakaavio
++ [Tietokantakaavio](https://github.com/SIholin/HuutokauppaTsoha/blob/master/Dokumentaatio/Tietokantakaavio.pdf)
