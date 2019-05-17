@@ -4,4 +4,4 @@ Huutokaupassa tuotteita voi laittaa myyntiin, jonka jälkeen muut voivat halutes
 
 ## Dokumentaatio
 
-..* Tietokantakaavio
++ Tietokantakaavio
