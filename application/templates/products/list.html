@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block body %}
+  <table>
+    <tr>
+      <th>Tuote</th>
+      <th>Hinta</th>
+    </tr>
+    {% for product in products %}
+    <tr>
+      <td>{{ product.name }}</td>
+      <td>{{ product.price }}</td>
+      <td>
+          <form method="POST" action="{{ url_for('products_set_new_price', product_id=product.id) }}">
+              <input type="number" name="new_price"/>
+              <input type="submit" value="Change price!"/>
+          </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+{% endblock %}
