@@ -5,3 +5,5 @@ Huutokaupassa tuotteita voi laittaa myyntiin, jonka jälkeen muut voivat halutes
 ## Dokumentaatio
 
 + [Tietokantakaavio](https://github.com/SIholin/HuutokauppaTsoha/blob/master/Dokumentaatio/Tietokantakaavio.pdf)
++ [Käyttötapaukset](https://github.com/SIholin/HuutokauppaTsoha/blob/master/documentation/usage.md)
++ [Heroku](https://enigmatic-temple-77296.herokuapp.com/)
