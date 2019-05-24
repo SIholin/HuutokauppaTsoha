@@ -8,7 +8,7 @@
 + Täytä kentät
 + Paina nappia
 
-**Hinnan muutoa**
+**Hinnan muutos**
 + Valitse 'List products'
 + Etsi listasta haluamasi tuote
 + Vaihda kenttään haluamasi uusi hinta
