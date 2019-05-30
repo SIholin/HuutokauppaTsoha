@@ -1,18 +1,29 @@
-from application import app, db
 from flask import redirect, render_template, request, url_for
+from flask_login import login_required, current_user
+
+from application import app, db
 from application.products.models import Product
+from application.products.forms import ProductForm
 
 @app.route("/products", methods=["GET"])
 def products_index():
     return render_template("products/list.html", products = Product.query.all())
 
 @app.route("/products/new/")
+@login_required
 def products_form():
-    return render_template("products/new.html")
+    return render_template("products/new.html", form = ProductForm())
 
 @app.route("/products/", methods=["POST"])
+@login_required
 def products_create():
-    p = Product(request.form.get("name"), request.form.get("description"), request.form.get("price"))
+    form = ProductForm(request.form)
+
+    if not form.validate():
+        return render_template("products/new.html", form = form)
+    
+    p = Product(form.name.data, form.description.data, form.price.data)
+    p.account_id = current_user.id
 
     db.session().add(p)
     db.session().commit()
@@ -20,6 +31,7 @@ def products_create():
     return redirect(url_for("products_index"))
 
 @app.route("/products/<product_id>/", methods=["POST"])
+@login_required
 def products_set_new_price(product_id):
     p = Product.query.get(product_id)
     p.price = request.form.get("new_price")
