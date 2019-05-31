@@ -30,11 +30,20 @@ def products_create():
 
     return redirect(url_for("products_index"))
 
-@app.route("/products/<product_id>/", methods=["POST"])
+@app.route("/products/change/price/<product_id>/", methods=["POST"])
 @login_required
 def products_set_new_price(product_id):
     p = Product.query.get(product_id)
     p.price = request.form.get("new_price")
     db.session().commit()
+
+    return redirect(url_for("products_index"))
+
+@app.route("/products/delete/<product_id>/", methods=["POST"])
+@login_required
+def products_delete(product_id):
+    p = Product.query.get(product_id)
+    db.session.delete(p)
+    db.session.commit()
 
     return redirect(url_for("products_index"))
