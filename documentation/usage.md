@@ -1,15 +1,35 @@
 ## Normaali käyttäjä
 
 **Tuotteiden listaus**
-+ Valitse 'List products'
++ Valitse 'Listaa tuotteet'
+
+**Käyttäjän rekisteröinti**
++ Valitse 'Rekisteröidy'
++ Täytä nimi (5-50 merkkiä), käyttäjänimi (uniikki, 3-50 merkkiä) ja salasana (5-50 merkkiä)
++ Paina 'Luo tunnus'
++ Käyttäjälle kerrotaan jos rekisteröityminen epäonnistuu
+
+**Kirjautuminen**
++ Valitse 'Kirjaudu'
++ Täytä käyttäjänimi ja salasana
++ Paina 'Login'
++ Käyttäjälle kerrotaan jos kirjautuminen epäonnistuu 
 
 **Tuotteen lisäys**
-+ Valitse 'Add a product'
++ Valitse 'Lisää tuote'
 + Täytä kentät
-+ Paina nappia
++ Paina nappia 'Lisää uusi tuote'
 
 **Hinnan muutos**
-+ Valitse 'List products'
-+ Etsi listasta haluamasi tuote
++ Valitse 'Listaa tuotteet'
++ Etsi listasta tuote
 + Vaihda kenttään haluamasi uusi hinta
-+ Paina 'Change price!'
++ Paina 'Vaihda hinta!'
+
+**Tuotteen poisto**
++ Valitse 'Listaa tuotteet'
++ Etsi listasta tuote
++ Paina 'Poista'
+
+**Uloskirjautuminen**
++ Valitse 'Kirjaudu ulos'
