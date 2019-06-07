@@ -5,7 +5,7 @@ class ProductForm(FlaskForm):
     name = StringField("Nimi", [validators.required(), validators.Length(max=100)])
     description = TextAreaField("Kuvaus", [validators.optional(), validators.Length(max=500)])
     price = IntegerField("Hinta", [validators.required()])
-    offer = IntegerField("Tarjous", [validators.required()])
 
     class Meta:
         csrf = False
+
