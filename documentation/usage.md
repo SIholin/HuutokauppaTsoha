@@ -31,5 +31,11 @@
 + Etsi listasta tuote
 + Paina 'Poista'
 
+**Tarjouksen tekeminen**
++ Valitse 'Listaa tuotteet'
++ Etsi listatsta tuote
++ Täytä kenttään tarjous
++ Paina 'Tarjoa'
+
 **Uloskirjautuminen**
 + Valitse 'Kirjaudu ulos'
