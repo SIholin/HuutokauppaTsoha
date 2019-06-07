@@ -1,27 +1,42 @@
 {% extends "layout.html" %}
 
 {% block body %}
-  <table>
-    <tr>
-      <th>Tuote</th>
-      <th>Hinta</th>
-    </tr>
+
+    
     {% for product in products %}
-    <tr>
-      <td>{{ product.name }}</td>
-      <td>{{ product.price }}</td>
-      <td>
-          <form method="POST" action="{{ url_for('products_set_new_price', product_id=product.id) }}">
-              <input type="number" name="new_price"/>
-              <input type="submit" value="Vaihda hinta!"/>
-          </form>
-      </td>
-      <td>
-            <form method="POST" action="{{ url_for('products_delete', product_id=product.id) }}">
-                <input type="submit" value="Poista!"/>
-            </form>
-        </td>
-    </tr>
+        <div class="card" style="width: 20rem;">
+            <div class="card-body">
+            <h4 class="card-title">{{ product.name }}</h4>
+            <h6 class="card-subtitle mb-2 text-muted">Lähtöhinta: {{ product.price }}</h6>
+            <p>{{ product.description }}</p>
+            <div class="form-group">
+                <form method="POST" action="{{ url_for('products_set_new_price', product_id=product.id) }}">
+                    <input type="number" class="form-control" name="new_price"/>
+                    <input type="submit" class="btn btn-primary" value="Vaihda hinta!"/>
+                </form>
+            </div>
+            <p>
+                <form method="POST" action="{{ url_for('products_delete', product_id=product.id) }}">
+                    <input type="submit" class="btn btn-primary" value="Poista!"/>
+                </form>
+            </p>
+            <p>
+                <form method="POST" action="{{ url_for('products_offer', product_id=product.id) }}">
+                    <input type="number" class="form-control" name="offer"/>
+                    <input type="submit" class="btn btn-primary" value="Tarjoa!"/>
+                </form>
+            </p>
+            <ul>
+            {% for offer in offers %}
+            {% if offer.product_id == product.id %}
+                <li>{{offer.price}}</li>
+            
+            {% endif%}
+            </ul>
+            {%endfor%}
+        </div>
+        
+
     {% endfor %}
-  </table>
+  
 {% endblock %}
