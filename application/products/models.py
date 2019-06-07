@@ -1,9 +1,8 @@
 from application import db
+from application.models import Base
 
-class Product(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    date_created = db.Column(db.DateTime, default=db.func.current_timestamp())
-
+class Product(Base):
+    
     name = db.Column(db.String(144), nullable=False)
     description = db.Column(db.String(500))
     price = db.Column(db.Integer, nullable=False)

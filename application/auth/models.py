@@ -1,13 +1,11 @@
 from application import db
+from application.models import Base
 
-class User(db.Model):
+from sqlalchemy.sql import text
+
+class User(Base):
 
     __tablename__ = "account"
-
-    id = db.Column(db.Integer, primary_key=True)
-    date_created = db.Column(db.DateTime, default=db.func.current_timestamp())
-    date_modified = db.Column(db.DateTime, default=db.func.current_timestamp(),
-                              onupdate=db.func.current_timestamp())
 
     name = db.Column(db.String(144), nullable=False)
     username = db.Column(db.String(144), nullable=False)
@@ -31,3 +29,17 @@ class User(db.Model):
     
     def is_authenticated(self):
         return True
+
+    @staticmethod
+    def find_how_many_products():
+        stmt = text("SELECT Account.id, Account.name, COUNT(Product.id) FROM Account"
+                    " LEFT JOIN Product ON Product.account_id = Account.id"
+                    " GROUP BY Account.id")
+        
+        res = db.engine.execute(stmt)
+
+        response = []
+        for row in res:
+            response.append({"id":row[0], "name":row[1], "amount":row[2]})
+
+        return response

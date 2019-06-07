@@ -2,6 +2,19 @@
 
 {% block body %}
   <p>
-    Tervetuloa huutokauppaan!
+    Tervetuloa huutokauppaan <span style="color:crimson;font-weight:bold">{{ current_user.name }}</span>!
   </p>
+
+  {% if product_amount is defined %}
+  <p>
+      Käyttäjät ja heidän tuotteiden määrä:
+  </p>
+  <ul>
+      {% for user in product_amount %}
+      <li>
+          {{user.name}} {{user.amount}}
+      </li>
+      {% endfor %}
+  </ul>
+  {% endif %}
 {% endblock %}
