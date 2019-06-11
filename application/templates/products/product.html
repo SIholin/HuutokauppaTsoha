@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<div class="card">
+    <div class="card-header">
+        Myyjä: {{ owner.username }}
+    </div>
+    <div class="card-body">
+        <h1 class="card-title">{{ product.name }}</h1>
+        <h5 class="card-subtitle text-success">Tämän hetkinen hinta: {{ product.price }}</h5>
+        <p class="card-text">{{ product.description }}</p>
+        {% if current_user.is_authenticated and current_user.id == owner.id%}
+        <div class="form-group">
+            <form method="POST" action="{{ url_for('products_set_new_description', product_id=product.id) }}">
+                <input type="text" class="form-control" name="new_description" />
+                <input type="submit" class="btn btn-primary" value="Vaihda kuvaus" />
+            </form>
+        </div>
+        <p>
+            <form method="POST" action="{{ url_for('products_delete', product_id=product.id) }}">
+                <input type="submit" class="btn btn-primary" value="Poista!" />
+            </form>
+        </p>
+        {% elif current_user.is_authenticated and current_user.id != owner.id %}
+        {% if e == 1 %}
+        <div class="alert alert-danger" role="alert">
+            Tarjous on liian matala!
+        </div>
+        {% endif %}
+        <p>
+            <form method="POST" action="{{ url_for('products_offer', product_id=product.id) }}">
+                <input type="number" class="form-control" name="offer" />
+                <input type="submit" class="btn btn-primary" value="Tarjoa!" />
+            </form>
+        </p>
+        {% endif %}
+        {% if current_user.is_authenticated %}
+        <h5 class="card-title">Tarjoukset:</h5>
+        <ul class="list-group">
+            {% for offer in  get_offers(product.id) %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                {{ get_account(offer.account_id).username }}
+                <span class="badge badge-primary badge-pill">{{ offer.price }}</span>
+            </li>
+        </ul>
+        {%endfor%}
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

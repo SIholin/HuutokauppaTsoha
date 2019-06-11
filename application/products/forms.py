@@ -8,4 +8,3 @@ class ProductForm(FlaskForm):
 
     class Meta:
         csrf = False
-
