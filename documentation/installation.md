@@ -9,4 +9,4 @@ pip install -r requirements.txt
 python3 run.py
 
 ```
-## [Käyttöohjeet](https://github.com/SIholin/HuutokauppaTsoha/blob/master/documentation/usage.md)
+käyttöohjeet löytyvät täältä -> [Käyttöohjeet](https://github.com/SIholin/HuutokauppaTsoha/blob/master/documentation/usage.md)
