@@ -1,6 +1,19 @@
 # HuutokauppaTsoha
 
-Huutokaupassa tuotteita voi laittaa myyntiin, jonka jälkeen muut voivat halutessaan tehdä huutoja tuotteesta. Huutokaupan päättyessä korkeimman tarjouksen tehnyt henkilö saa tuotteen huutamallaan hinnalla.
+Huutokaupassa tuotteita voi laittaa myyntiin, jonka jälkeen muut voivat halutessaan tehdä huutoja tuotteesta. Tuotteen myyjä saa korkeimman tarjouksen tehneen käyttäjän sähköpostiosoitteen. 
+
+Toimintoja:
++ Rekisteröityminen
++ Kirjautuminen
++ Salasanan vaihto
++ Tuotteiden listaaminen
++ Omien tuotteiden listaaminen
++ Tuotteiden haku nimen perusteella
++ Tuotteen luonti
++ Tuotteen poistaminen
++ Tuotteen kuvauksen päivitys
++ Tarjouksen tekeminen
++ Huutokaupan päättäminen
 
 ## Dokumentaatio
 
