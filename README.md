@@ -19,7 +19,7 @@ Toimintoja:
 
 + [Tietokantakaavio](https://github.com/SIholin/HuutokauppaTsoha/blob/master/documentation/Tietokantakaavio.pdf)
 + [Käyttötapaukset](https://github.com/SIholin/HuutokauppaTsoha/blob/master/documentation/usage.md)
-+ [Asennusohjeet](https://github.com/SIholin/HuutokauppaTsoha/blob/master/documentation/installation.md)
++ [Asennus- ja käyttöohjeet](https://github.com/SIholin/HuutokauppaTsoha/blob/master/documentation/installation.md)
 
 ## Heroku
 
