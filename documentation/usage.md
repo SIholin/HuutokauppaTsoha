@@ -87,7 +87,7 @@ DELETE FROM product WHERE product.id = ?;
 + Täytä kenttään tarjous
 + Paina 'Tarjoa'
 ```SQL
-INSER INTO offer (price, account_id, product_id);
+INSERT INTO offer (price, account_id, product_id);
 ```
 
 **Uloskirjautuminen**
