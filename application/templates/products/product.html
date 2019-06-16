@@ -2,13 +2,18 @@
 
 {% block body %}
 
-<div class="card">
+<div class="card text-center">
     <div class="card-header">
-        Myyjä: {{ owner.username }}
+        {% if product.onSale %}
+        Huutokauppa on <span style="color:green">KÄYNNISSÄ!</span>
+        {% else %}
+        Huutokauppa on <span style="color:red">PÄÄTTYNYT!</span>
+        {% endif %}
     </div>
     <div class="card-body">
         <h1 class="card-title">{{ product.name }}</h1>
-        <h5 class="card-subtitle text-success">Tämän hetkinen hinta: {{ product.price }}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Myyjä: {{ owner.username }}</h6>
+        <h5 class="card-subtitle text-success">Tämän hetkinen hinta: {{ best_offer }}</h5>
         <p class="card-text">{{ product.description }}</p>
         {% if current_user.is_authenticated and current_user.id == owner.id%}
         <div class="form-group">
@@ -17,15 +22,33 @@
                 <input type="submit" class="btn btn-primary" value="Vaihda kuvaus" />
             </form>
         </div>
-        <p>
+        <div class="form-group">
             <form method="POST" action="{{ url_for('products_delete', product_id=product.id) }}">
-                <input type="submit" class="btn btn-primary" value="Poista!" />
+                <input type="submit" class="btn btn-primary" value="Poista tuote!" />
             </form>
-        </p>
+        
+        </div>
+
+        {% if product.onSale %}
+        <div class="form-group">
+            <form method="POST" action="{{ url_for('products_end', product_id=product.id) }}">
+                <input type="submit" class="btn btn-primary" value="Lopeta huutokauppa" />
+            </form>
+        </div>
+        {% endif %}
+        {% if best_user != -1%}
+        <div class="alert alert-success" role="alert">
+            Korkein tarjous on käyttäjällä {{ best_user.username }}, sähköpostiosoite on {{ best_user.email }}
+        </div>
+        {% endif %}
         {% elif current_user.is_authenticated and current_user.id != owner.id %}
         {% if e == 1 %}
-        <div class="alert alert-danger" role="alert">
+        <div class="alert alert-warning" role="alert">
             Tarjous on liian matala!
+        </div>
+        {% elif e == 2 %}
+        <div class="alert alert-danger" role="alert">
+            Huutokauppa on päättynyt
         </div>
         {% endif %}
         <p>

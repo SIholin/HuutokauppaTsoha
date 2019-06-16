@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+  
+{% block body %}
+<h1>Tägin lisäys</h1>
+<form method="POST" action="{{ url_for('tags_create') }}">
+    {{ form.csrf_token }}
+    <div class="form-group">
+        {{ form.name.label }}
+        {{ form.name(class_="form-control", placeholder="Nimi")}}
+            <ul>
+            {% for error in form.name.errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+            </ul>
+    </div>
+    <input type="submit" class="btn btn-primary" value="Lisää tägi"/>  
+</form>
+{% endblock %}

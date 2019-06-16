@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+    <h1>
+        Käyttäjän <span style="color:blue;font-weight:bolder">{{ user.username }} </span>tuotteet:
+    </h1>
+    
+    {% for product in products %}
+
+        {% include "products/one.html" %}
+
+    {% endfor %}
+  
+{% endblock %}

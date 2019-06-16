@@ -14,5 +14,16 @@ class Offer(Base):
         self.price = price
 
     def by_product(product_id):
-        return Offer.query.filter(Offer.product_id == product_id)
+        offers = Offer.query.filter(Offer.product_id == product_id)
+        return offers.order_by(Offer.price.desc())
 
+    @staticmethod
+    def get_biggest_offer(product_id):
+        stmt = text("SELECT MAX(price) FROM offer "
+                    "WHERE offer.product_id = :id").params(id = product_id)
+        res = db.engine.execute(stmt)
+        
+        for row in res:
+           return row[0]
+        
+        

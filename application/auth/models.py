@@ -10,14 +10,16 @@ class User(Base):
     name = db.Column(db.String(144), nullable=False)
     username = db.Column(db.String(144), nullable=False)
     password = db.Column(db.String(144), nullable=False)
+    email = db.Column(db.String(200), nullable=False)
 
     offers = db.relationship("Offer", backref='account', lazy=True)
     products = db.relationship("Product", backref='account', lazy=True)
 
-    def __init__(self, name, username, password):
+    def __init__(self, name, username, password, email):
         self.name = name
         self.username = username
         self.password = password
+        self.email = email
 
     def get_id(self):
         return self.id
@@ -30,6 +32,9 @@ class User(Base):
     
     def is_authenticated(self):
         return True
+    
+    def roles(self):
+        return ["ADMIN"]
 
     @staticmethod
     def find_how_many_products():
