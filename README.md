@@ -21,6 +21,7 @@ Toimintoja:
 + [Käyttötapaukset ja SQL-kyselyt](https://github.com/SIholin/HuutokauppaTsoha/blob/master/documentation/usage.md)
 + [Asennus- ja käyttöohjeet](https://github.com/SIholin/HuutokauppaTsoha/blob/master/documentation/installation.md)
 + [Puuttuvia toiminnalisuuksia](https://github.com/SIholin/HuutokauppaTsoha/blob/master/documentation/missing.md)
++ [CREATE TABLE - lauseet](https://github.com/SIholin/HuutokauppaTsoha/blob/master/documentation/createTable.md)
 
 ## Heroku
 
