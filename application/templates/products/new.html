@@ -1,6 +1,4 @@
-{% extends "layout.html" %}
-  
-{% block body %}
+
 <h1>Tuotteen lisäys</h1>
 <form method="POST" action="{{ url_for('products_create') }}">
     {{ form.csrf_token }}
@@ -24,4 +22,3 @@
     </div>
     <input type="submit" class="btn btn-primary" value="Lisää tuote"/>  
 </form>
-{% endblock %}

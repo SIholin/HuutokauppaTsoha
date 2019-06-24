@@ -1,75 +1,125 @@
 {% extends "layout.html" %}
 
 {% block body %}
+<div class="card-group">
+    <div class="card text-center">
+        <div class="card-header">
+            {% if product.onSale %}
+            Huutokauppa on <span style="color:green">KÄYNNISSÄ!</span>
+            {% else %}
+            Huutokauppa on <span style="color:red">PÄÄTTYNYT!</span>
+            {% endif %}
+        </div>
+        <div class="card-body">
+            <h1 class="card-title">{{ product.name }}</h1>
+            <h6 class="card-subtitle mb-2 text-muted">Myyjä: <a
+                    href="{{ url_for('auth_profile', account_id=owner.id) }}">{{ owner.username }}</a></h6>
+            <h5 class="card-subtitle text-success">Tämän hetkinen hinta: {{ best_offer }}</h5>
+            <p class="card-text">{{ product.description }}</p>
+            {% if current_user.is_authenticated and current_user.id == owner.id%}
+            <div class="form-group row">
+                <form method="POST" action="{{ url_for('products_set_new_description', product_id=product.id) }}">
+                    <div class="form-row align-items-center">
+                    <div class ="col-auto my-1">
+                    <input type="text" class="form-control" name="new_description" placeholder="Uusi kuvaus" />
+                    </div>
+                    <div class="col-auto my-1">
+                    <input type="submit" class="btn btn-primary" value="Vaihda kuvaus" />
+                    </div>
+                </div>
+                </form>
+            </div>
+            <div class="form-group row">
+                <form method="POST" action="{{ url_for('products_delete', product_id=product.id) }}">
+                        <div class="form-row align-items-center">    
+                    <div class="col-auto my-1">
+                   
+                        <input type="submit" class="btn btn-danger" value="Poista tuote!" />
+                        </div>
+                    </div>
+                    </form>
+                {% if product.onSale %}
+                <form method="POST" action="{{ url_for('products_end', product_id=product.id) }}">
+                       
+                    <div class="col-auto my-1">
+                    <input type="submit" class="btn btn-warning" value="Lopeta huutokauppa" />
+                    </div>
+                
+                </form>
+                
+                {% endif %}
+            </div>
+            <div class="form-group row">
+                <form method="POST" action="{{ url_for('product_add_tag', product_id=product.id) }}">
+                    <div class="form-row align-items-center">
+                        <div class="col-auto my-1">
+                            <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
+                            <select class="custom-select mr-sm-2" name="tags" id="inlineFormCustomSelect">
+                                {% for t in allTags %}
+                                <option value="{{t.id}}">{{ t.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-auto my-1">
+                            <input type="submit" class="btn btn-primary" value="Lisää tuotteelle tagi" />
+                        </div>
+                    </div>
+                </form>
+            </div>
 
-<div class="card text-center">
-    <div class="card-header">
-        {% if product.onSale %}
-        Huutokauppa on <span style="color:green">KÄYNNISSÄ!</span>
-        {% else %}
-        Huutokauppa on <span style="color:red">PÄÄTTYNYT!</span>
-        {% endif %}
-    </div>
-    <div class="card-body">
-        <h1 class="card-title">{{ product.name }}</h1>
-        <h6 class="card-subtitle mb-2 text-muted">Myyjä: {{ owner.username }}</h6>
-        <h5 class="card-subtitle text-success">Tämän hetkinen hinta: {{ best_offer }}</h5>
-        <p class="card-text">{{ product.description }}</p>
-        {% if current_user.is_authenticated and current_user.id == owner.id%}
-        <div class="form-group">
-            <form method="POST" action="{{ url_for('products_set_new_description', product_id=product.id) }}">
-                <input type="text" class="form-control" name="new_description" />
-                <input type="submit" class="btn btn-primary" value="Vaihda kuvaus" />
-            </form>
-        </div>
-        <div class="form-group">
-            <form method="POST" action="{{ url_for('products_delete', product_id=product.id) }}">
-                <input type="submit" class="btn btn-primary" value="Poista tuote!" />
-            </form>
-        
-        </div>
 
-        {% if product.onSale %}
-        <div class="form-group">
-            <form method="POST" action="{{ url_for('products_end', product_id=product.id) }}">
-                <input type="submit" class="btn btn-primary" value="Lopeta huutokauppa" />
-            </form>
+            {% if best_user != -1%}
+            <div class="alert alert-success" role="alert">
+                Korkein tarjous on käyttäjällä {{ best_user.username }}, sähköpostiosoite on {{ best_user.email }}
+            </div>
+            {% endif %}
+            {% elif current_user.is_authenticated and current_user.id != owner.id %}
+            {% if e == 1 %}
+            <div class="alert alert-warning" role="alert">
+                Tarjous on liian matala!
+            </div>
+            {% elif e == 2 %}
+            <div class="alert alert-danger" role="alert">
+                Huutokauppa on päättynyt
+            </div>
+            {% endif %}
+            <p>
+                <form method="POST" action="{{ url_for('products_offer', product_id=product.id) }}">
+                    <input type="number" class="form-control" name="offer" />
+                    <input type="submit" class="btn btn-primary" value="Tarjoa!" />
+                </form>
+            </p>
+            {% endif %}
+            <h4 class="text-center">
+                    Tagit
+                </h4>
+                <ul class="list-group">
+                    {% for tag in tags %}
+                    <li class="list-group-item">
+                        {{ tag.name }}
+                    </li>
+                    {% endfor %}
+                </ul>
+
         </div>
-        {% endif %}
-        {% if best_user != -1%}
-        <div class="alert alert-success" role="alert">
-            Korkein tarjous on käyttäjällä {{ best_user.username }}, sähköpostiosoite on {{ best_user.email }}
-        </div>
-        {% endif %}
-        {% elif current_user.is_authenticated and current_user.id != owner.id %}
-        {% if e == 1 %}
-        <div class="alert alert-warning" role="alert">
-            Tarjous on liian matala!
-        </div>
-        {% elif e == 2 %}
-        <div class="alert alert-danger" role="alert">
-            Huutokauppa on päättynyt
-        </div>
-        {% endif %}
-        <p>
-            <form method="POST" action="{{ url_for('products_offer', product_id=product.id) }}">
-                <input type="number" class="form-control" name="offer" />
-                <input type="submit" class="btn btn-primary" value="Tarjoa!" />
-            </form>
-        </p>
-        {% endif %}
-        {% if current_user.is_authenticated %}
-        <h5 class="card-title">Tarjoukset:</h5>
-        <ul class="list-group">
-            {% for offer in  get_offers(product.id) %}
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                {{ get_account(offer.account_id).username }}
-                <span class="badge badge-primary badge-pill">{{ offer.price }}</span>
-            </li>
-        </ul>
-        {%endfor%}
-        {% endif %}
     </div>
+    {% if current_user.is_authenticated %}
+    <div class="card text-center">
+           <div class="card-header">
+            <span style="font-weight: bold">Tarjoukset:</span>
+            </div>
+            <ul class="list-group">
+                {% for offer in  get_offers(product.id) %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    {{ get_account(offer.account_id).username }}
+                    <span class="badge badge-primary badge-pill">{{ offer.price }}</span>
+                </li>
+                {%endfor%}
+            </ul>
+           
+
+    </div>
+    {% endif %}
 </div>
 
 {% endblock %}

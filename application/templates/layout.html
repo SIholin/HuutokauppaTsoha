@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fi">
 
 <head>
     <meta charset="utf-8">
@@ -17,35 +17,29 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
-            {% if current_user.is_authenticated %}
             <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('products_index') }} ">Tuotteet</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('tags_index') }}">Tägit</a>
+                        </li>
+
+            {% if current_user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('products_index') }} ">Listaa tuotteet</a>
+                    <a class="nav-link" href="{{ url_for('auth_profile', account_id=current_user.id) }} ">Oma profiili</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('products_form') }} ">Lisää tuote</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('products_owner_index', account_id=current_user.id) }} ">Listaa omat tuote</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('auth_modify', account_id=current_user.id) }} ">Vaihda salasana</a>
-                </li>
+               
             </ul>
 
             <div class="form-inline mt-2 mt-md-0">
-                   
+
                 <a href="{{ url_for('auth_logout') }}">{{ current_user.name }} - Kirjaudu ulos</a>
             </div>
             {% else %}
-            <ul class="navbar-nav mr-auto">
-                    <li calss="nav-item">
-                            <a class="nav-link" href="{{ url_for('products_index') }} ">Listaa tuotteet</a>
-                    </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('auth_register') }}"> Rekisteröidy</a>
                 </li>
-                
             </ul>
             <div class="form-inline mt-2 mt-md-0"></div>
             <a href="{{ url_for('auth_login') }}">Kirjaudu</a>

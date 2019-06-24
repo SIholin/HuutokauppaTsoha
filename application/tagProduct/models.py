@@ -1,5 +1,8 @@
 from application import db
 from application.models import Base
+from application.tag.models import Tag
+
+from sqlalchemy.sql import text
 
 class TagProduct(Base):
 
@@ -10,3 +13,12 @@ class TagProduct(Base):
         self.user_id = user_id
         self.tag_id = tag_id
 
+    @staticmethod
+    def tags_by_product_id(product_id):
+        
+        tps = TagProduct.query.filter(TagProduct.product_id == product_id)
+        tags = []
+        for t in tps:
+            tags.append(Tag.query.get(t.tag_id))
+
+        return tags

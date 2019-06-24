@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<h1 class="display-1">Tägit</h1>
+{% include "tag/new.html" %}
+    <ul class="list-group">
+    {% for tag in tags %}
+        <li class="list-group-item">{{ tag.name }}</li>
+    {% endfor %}
+    </ul>
+  
+{% endblock %}

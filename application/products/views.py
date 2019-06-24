@@ -7,17 +7,18 @@ from application.products.models import Product
 from application.products.forms import ProductForm
 from application.offer.models import Offer
 from application.auth.models import User
+from application.tag.models import Tag
+from application.tagProduct.models import TagProduct
 
+# UPLOAD_FOLDER = '/path/to/the/uploads'
+# ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
+
+# app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route("/products/", methods=["GET"])
 def products_index():
 
-    return render_template("products/list.html", biggest_offer = Offer.get_biggest_offer, products = Product.query.all(), get_account = User.query.get)
-
-@app.route("/products/new/")
-@login_required()
-def products_form():
-    return render_template("products/new.html", form = ProductForm())
+    return render_template("products/list.html", form = ProductForm(), biggest_offer = Offer.get_biggest_offer, products = Product.query.all(), get_account = User.query.get)
 
 @app.route("/products/", methods=["POST"])
 @login_required()
@@ -48,20 +49,12 @@ def products_search():
 
     return render_template("products/list.html", biggest_offer = Offer.get_biggest_offer, get_account = User.query.get, products = products)
 
-@app.route("/products/<account_id>/")
-@login_required()
-def products_owner_index(account_id):
-    u = User.query.get(account_id)
-    products = Product.query.filter(Product.account_id == account_id)
-    return render_template("products/ownerList.html", user = u, products = products, get_account = User.query.get)
-
 @app.route("/product/<product_id>/", methods=["GET"])
 def product_index(product_id):
     p = Product.query.get(product_id)
     owner = User.query.get(p.account_id)
-    
+    tags = TagProduct.tags_by_product_id(product_id)
     biggest_offer = Offer.get_biggest_offer(product_id)
-
     if biggest_offer is None:
         best_user = -1
         biggest_offer = 0
@@ -70,7 +63,7 @@ def product_index(product_id):
         acc_id = o.account_id
         best_user = User.query.get(acc_id)
    
-    return render_template("products/product.html", best_offer = biggest_offer, product = p, best_user = best_user, get_account = User.query.get, get_offers = Offer.by_product, owner = owner)
+    return render_template("products/product.html", allTags = Tag.query.all(), tags = tags, best_offer = biggest_offer, product = p, best_user = best_user, get_account = User.query.get, get_offers = Offer.by_product, owner = owner)
 
 @app.route("/products/change/description/<product_id>/", methods=["POST"])
 @login_required()
@@ -129,3 +122,39 @@ def products_offer(product_id):
             return render_template("products/product.html", best_offer = biggest_offer, owner = owner, e = 1, product = p, get_account = User.query.get, get_offers = Offer.by_product)    
        
     return redirect(url_for("product_index", product_id = product_id))
+
+@app.route("/products/add/tag/<product_id>/", methods=["POST"])
+@login_required()
+def product_add_tag(product_id):
+    p = Product.query.get(product_id)
+    if current_user.id == p.account_id:
+    
+        tag_id = request.form.get("tags")
+        tps = TagProduct.query.filter_by(tag_id=tag_id, product_id=product_id).first()
+            
+        if tps is None:        
+            tp = TagProduct(-1, -1)
+            tp.product_id = product_id
+            tp.tag_id = tag_id
+            db.session().add(tp)
+            db.session().commit()
+
+    return redirect(url_for("product_index", product_id = product_id))
+
+# @app.route("/product/upload/<product_id>/", methods=["POST"])
+# @login_required()
+# def upload_file(product_id):
+    # if 'file' not in request.files:
+        # flash('No file part')
+        # return redirect(url_for("product_index", product_id = product_id))
+    # file = request.files['file']
+    # if file.filename == '':
+        # flash('No selcted file')
+        # return redirect(url_for("product_index", product_id = product_id))
+    # if file and allowed_file(file.filename):
+        # flename = file.filename
+        # file.save()
+    
+# def allowed_file(filename):
+    # return '.' in filename and \
+            # filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS

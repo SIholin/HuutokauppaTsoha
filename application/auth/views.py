@@ -3,6 +3,8 @@ from flask_login import login_user, logout_user, current_user
 
 from application import app, db, login_required
 from application.auth.models import User
+from application.offer.models import Offer
+from application.products.models import Product
 from application.auth.forms import LoginForm, RegisterForm, ModifyForm
 
 @app.route("/auth/login", methods = ["GET", "POST"])
@@ -46,26 +48,40 @@ def auth_register():
 
     return redirect(url_for("index"))
 
-@app.route("/auth/modify/<account_id>/", methods=["GET", "POST"])
-@login_required()
-def auth_modify(account_id):
-   
-    if request.method == "GET":
-        return render_template("auth/modify.html", form = ModifyForm())
+@app.route("/auth/profile/<account_id>/", methods=["GET", "POST"])
+def auth_profile(account_id):
     u = User.query.get(account_id)
+    products = Product.query.filter(account_id == account_id)
+    if request.method == "GET":
+        return render_template("auth/profile.html", get_account = User.query.get, products = products, account = u, form = ModifyForm())
+   
     if current_user.id != u.id:
-        return render_template("auth/modify.html", form = ModifyForm(), error = "Väärä käyttäjä")
+        return render_template("auth/profile.html", form = ModifyForm(), error = "Väärä käyttäjä")
     
     form = ModifyForm(request.form)
 
     if not form.validate():
-        return render_template("auth/modify.html", form = form)
+        return render_template("auth/profile.html", form = form)
 
-    
     u.password = form.password.data
     
     db.session().commit()
 
+    return render_template(url_for("auth/profile.html",))
+
+@app.route("/auth/delete/<account_id>/", methods=["POST"])
+def auth_delete(account_id):
+    u = User.query.get(account_id)
+    offers = Offer.query.filter(Offer.account_id == account_id)
+    for offer in offers:
+        db.session().delete(offer)
+        db.session().commit()
+    if current_user.id == u.id:
+        db.session().delete(u)
+        db.session().commit()
+
     return redirect(url_for("index"))
+
+
 
 

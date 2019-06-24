@@ -3,6 +3,8 @@
 {% block body %}
 
 <h1 class="display-1">Tuotteet:</h1>
+
+{% include "products/new.html" %}
     
 <h1 class="display-6">Etsi tuotteen nimen perusteella</h1>
 <form method="POST" action="{{ url_for('products_search') }}">
