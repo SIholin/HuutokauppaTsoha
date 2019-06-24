@@ -61,14 +61,14 @@ INSERT INTO product (name, description, price)
 VALUES (?, ?, ?);
 ```
 
-**Hinnan muutos**
+**Kuvauksen muutos**
 + Valitse 'Listaa tuotteet'
 + Etsi listasta tuote 
 + Paina tuotteen nimeä
-+ Vaihda kenttään haluamasi uusi hinta
-+ Paina 'Vaihda hinta!'
++ Vaihda kenttään haluamasi kuvaus
++ Paina 'Vaihda kuvaus'
 ```SQL
-UPDATE product SET price = ? WHERE product.id = ?;
+UPDATE product SET description = ? WHERE product.id = ?;
 ```
 
 **Tuotteen poisto**
