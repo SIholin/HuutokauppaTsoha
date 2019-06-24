@@ -67,7 +67,7 @@ def auth_profile(account_id):
     
     db.session().commit()
 
-    return render_template(url_for("auth/profile.html",))
+    return redirect(url_for("auth_profile", account_id = account_id))
 
 @app.route("/auth/delete/<account_id>/", methods=["POST"])
 def auth_delete(account_id):
