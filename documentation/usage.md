@@ -116,6 +116,12 @@ INSERT INTO offer (price, account_id, product_id);
 DELETE FROM tag WHERE tag.id = ?;
 ```
 
+**Listaa käyttäjät**
++ Valitse 'Käyttäjät'
+```SQL
+SELECT * FROM account
+```
+
 **Käyttäjän poisto**
 + Valitse 'Käyttäjät'
 + Etsi listalta käyttäjä
