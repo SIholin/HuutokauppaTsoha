@@ -1,9 +1,22 @@
 ## Rekisteröitymätön käyttäjä
 
 **Tuotteiden listaus**
-+ Valitse 'Listaa tuotteet'
++ Valitse 'Tuotteet'
 ```SQL
 SELECT * FROM product;
+```
+
+**Tagien listaus**
++ Valitse 'Tagit'
+```SQL
+SELECT * FROM tag;
+```
+
+**Tuotteiden listaus tagin perusteella**
++ Valitse 'Tagit'
+```SQL
+SELECT * FROM product
+WHERE product.tag_id = ?
 ```
 
 **Tuotteiden haku nimen perusteella**
@@ -75,13 +88,13 @@ UPDATE product SET description = ? WHERE product.id = ?;
 + Valitse 'Listaa tuotteet'
 + Etsi listasta tuote 
 + Paina tuotteen nimeä
-+ Paina 'Poista'
++ Paina 'Poista tuote'
 ```SQL
 DELETE FROM product WHERE product.id = ?;
 ```
 
 **Tarjouksen tekeminen**
-+ Valitse 'Listaa tuotteet'
++ Valitse 'Tuotteet'
 + Etsi listatsta tuote 
 + Paina tuotteen nimeä
 + Täytä kenttään tarjous
@@ -92,3 +105,28 @@ INSERT INTO offer (price, account_id, product_id);
 
 **Uloskirjautuminen**
 + Valitse 'Kirjaudu ulos'
+
+## Admin käyttäjä
+
+**Tägin poisto**
++ Valitse 'Tagit'
++ Etsi listasta tagi
++ Paina 'Poista'
+```SQL
+DELETE FROM tag WHERE tag.id = ?;
+```
+
+**Käyttäjän poisto**
++ Valitse 'Käyttäjät'
++ Etsi listalta käyttäjä
++ Paina 'Poista'
+```SQL
+DELETE FROM account WHERE account.id = ?
+```
+
+**Käyttäjälle Admin oikeudet**
++ Valitse 'Käyttäjät'
++ Etsi listasta käyttäjä
++ Paina 'Tee käyttäjästä Admin'
+```SQL
+UPDATE account SET role = ? WHERE account.id = ?
