@@ -59,7 +59,7 @@ UPDATE account SET password = ? WHERE account.id = ?;
 ```
 
 **Omien tuotteiden listaus**
-+ Valitse 'Listaa omat tuotteet'
++ Valitse 'Oma profiili'
 ```SQL
 SELECT * FROM product
 WHERE product.account_id = account.id;
@@ -70,13 +70,13 @@ WHERE product.account_id = account.id;
 + Täytä kentät
 + Paina nappia 'Lisää uusi tuote'
 ```SQL
-INSERT INTO product (name, description, price)
+INSERT INTO product (name, description)
 VALUES (?, ?, ?);
 ```
 
 **Kuvauksen muutos**
 + Valitse 'Listaa tuotteet'
-+ Etsi listasta tuote 
++ Etsi listasta tuoteesi 
 + Paina tuotteen nimeä
 + Vaihda kenttään haluamasi kuvaus
 + Paina 'Vaihda kuvaus'
@@ -86,7 +86,7 @@ UPDATE product SET description = ? WHERE product.id = ?;
 
 **Tuotteen poisto**
 + Valitse 'Listaa tuotteet'
-+ Etsi listasta tuote 
++ Etsi listasta tuoteesi 
 + Paina tuotteen nimeä
 + Paina 'Poista tuote'
 ```SQL
@@ -100,7 +100,19 @@ DELETE FROM product WHERE product.id = ?;
 + Täytä kenttään tarjous
 + Paina 'Tarjoa'
 ```SQL
-INSERT INTO offer (price, account_id, product_id);
+INSERT INTO offer (price, account_id, product_id)
+VALUES (?, ?, ?);
+```
+
+**Tagin lisääminen tuotteelle**
++ Valitse 'Tuotteet'
++ Etsi listasta tuoteesi
++ Paina tuotteen nimeä
++ Valitse listasta tagi
++ Paina 'Lisää tuotteelle tägi'
+```SQL
+INSERT INTO tagProduct (product_id, tag_id)
+VALUES (?, ?);
 ```
 
 **Uloskirjautuminen**
@@ -136,3 +148,4 @@ DELETE FROM account WHERE account.id = ?
 + Paina 'Tee käyttäjästä Admin'
 ```SQL
 UPDATE account SET role = ? WHERE account.id = ?
+```
