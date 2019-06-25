@@ -1,6 +1,6 @@
 # HuutokauppaTsoha
 
-Huutokaupassa tuotteita voi laittaa myyntiin, jonka jälkeen muut voivat halutessaan tehdä huutoja tuotteesta. Tuotteen myyjä saa korkeimman tarjouksen tehneen käyttäjän sähköpostiosoitteen. Myyjä voi lopettaa huutokaupan silloin kun haluaa, lisätä tägejä tuotteille sekä poistaa tuotteen. Huutokaupassa on mahdollista listata tuotteet ja tagit.  
+Huutokaupassa tuotteita voi laittaa myyntiin, jonka jälkeen muut voivat halutessaan tehdä huutoja tuotteesta. Tuotteen myyjä saa korkeimman tarjouksen tehneen käyttäjän sähköpostiosoitteen. Myyjä voi lopettaa huutokaupan silloin kun haluaa, lisätä tägejä tuotteille sekä poistaa tuotteen. Huutokaupassa on mahdollista listata tuotteet ja tagit. Tuotteita voi listata myös myyjä ja tagi kohtaisesti. Tuotteita voi myös hakea nimen perusteella.
 
 Toimintoja:
 + Rekisteröityminen
