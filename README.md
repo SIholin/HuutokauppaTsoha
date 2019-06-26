@@ -19,7 +19,8 @@ Toimintoja:
 
 ## Dokumentaatio
 
-+ [Tietokantakaavio](https://github.com/SIholin/HuutokauppaTsoha/blob/master/documentation/Tietokantakaavio.pdf)
++ [Alkuperäinen tietokantakaavio](https://github.com/SIholin/HuutokauppaTsoha/blob/master/documentation/Tietokantakaavio.pdf)
++ [Lopullinen tietokantakaavio](https://github.com/SIholin/HuutokauppaTsoha/blob/master/documentation/uusiTietokantakaavio.pdf)
 + [Käyttötapaukset ja SQL-kyselyt](https://github.com/SIholin/HuutokauppaTsoha/blob/master/documentation/usage.md)
 + [Asennus- ja käyttöohjeet](https://github.com/SIholin/HuutokauppaTsoha/blob/master/documentation/installation.md)
 + [Puuttuvia toiminnalisuuksia](https://github.com/SIholin/HuutokauppaTsoha/blob/master/documentation/missing.md)
