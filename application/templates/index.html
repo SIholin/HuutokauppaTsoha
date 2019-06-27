@@ -1,20 +1,71 @@
 {% extends "layout.html" %}
 
 {% block body %}
-  <p>
+  <h1 class="display-1">
     Tervetuloa huutokauppaan <span style="color:blue;font-weight:bold">{{ current_user.name }}</span>!
+  </h1>
+  
+  {% if product_amount is defined and current_user.is_authenticated %}
+  {% if current_user.is_admin()%}
+  <p class="lead"><strong>Tilastot:</strong></p>
+  <div class="container">
+    <div class="row">
+        <div class="col-6">
+  <p class="lead">
+      Käyttäjän tuotteiden lukumäärä:
   </p>
-
-  {% if product_amount is defined %}
-  <p>
-      Käyttäjät ja heidän tuotteiden määrä:
-  </p>
-  <ul>
+  <ul class="list-group">
       {% for user in product_amount %}
-      <li>
-          {{user.name}} {{user.amount}}
-      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="{{ url_for('auth_profile', account_id=user.id)}}">{{ user.name }} </a>
+            <span class="badge badge-primary badge-pill">{{ user.amount }}</span>
+        </li>
       {% endfor %}
   </ul>
+  </div>
+  <div class="col-6">
+        <p class="lead">
+            Käyttäjän korkein tarjous:
+        </p>
+        <ul class="list-group">
+            {% for u in max_offer %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <a href="{{ url_for('auth_profile', account_id=u.id)}}">{{ u.name }} </a>
+                  <span class="badge badge-primary badge-pill">{{ u.value }}</span>
+              </li>
+            {% endfor %}
+        </ul>
+        </div>
+  </div>
+  <div class="row">
+        <div class="col-6">
+  <p class="lead">
+      Käyttäjän tarjousten keskiarvo:
+  </p>
+  <ul class="list-group">
+      {% for a in offer_average %}
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="{{ url_for('auth_profile', account_id=a.id)}}">{{ a.name }} </a>
+            <span class="badge badge-primary badge-pill">{{ a.average }}</span>
+        </li>
+      {% endfor %}
+  </ul>
+  </div>
+  <div class="col-6">
+        <p class="lead">
+            Käyttäjän pienin tarjous:
+        </p>
+        <ul class="list-group">
+            {% for account in min_offer %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <a href="{{ url_for('auth_profile', account_id=account.id)}}">{{ account.name }} </a>
+                  <span class="badge badge-primary badge-pill">{{ account.value }}</span>
+              </li>
+            {% endfor %}
+        </ul>
+        </div>
+  </div>
+  </div>
+  {% endif %}
   {% endif %}
 {% endblock %}

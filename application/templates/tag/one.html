@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<p class="lead">Tuotteet, joissa tägi <span style="color: blue"> {{ tag.name }}</span> esiintyy</p>
+
+{% for product in products %}
+
+{% include "products/one.html" %}
+
+{% endfor %}
+   
+  
+{% endblock %}

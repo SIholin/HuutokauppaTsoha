@@ -3,11 +3,34 @@
 {% block body %}
 
 <h1 class="display-1">Tägit</h1>
+{% if current_user.is_authenticated %}
 {% include "tag/new.html" %}
-    <ul class="list-group">
+{% endif %}
+<ul class="list-group">
+
     {% for tag in tags %}
-        <li class="list-group-item">{{ tag.name }}</li>
+    <li class="list-group-item">
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-2">
+
+                    <a href="{{ url_for('tag_index', tag_id = tag.id)}}">{{ tag.name }} </a>
+
+                </div>
+
+                {% if current_user.is_authenticated and current_user.is_admin() %}
+                <div class="col-3">
+                    <form method="POST" action="{{ url_for('tag_delete', tag_id=tag.id) }}">
+
+                        <input type="submit" class="btn btn-danger" value="Poista tägi" />
+
+                    </form>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </li>
     {% endfor %}
-    </ul>
-  
+</ul>
+
 {% endblock %}

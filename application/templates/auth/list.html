@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+{% block body %}
+{% if current_user.is_admin %}
+<h1 class="display-1">Käyttäjät:</h1>
+
+<ul class="list-group">
+    {% for account in accounts %}
+
+    <li class="list-group-item">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <a href="{{ url_for('auth_profile', account_id=account.id) }}">{{ account.username }}</a>
+                </div>
+                {% if account.is_admin() %}
+                <div class="col">
+                    <div class="alert alert-primary" role="alert">
+                        Käyttäjä on ADMIN
+                    </div>
+                </div>
+                {% else %}
+                <div class="col">
+                    <form method="POST" action="{{ url_for('auth_make_admin', account_id=account.id) }}">
+
+                        <input type="submit" class="btn btn-success" value="Tee käyttäjästä ADMIN" />
+
+                    </form>
+                </div>
+                <div class="col">
+                    <form method="POST" action="{{ url_for('auth_delete', account_id=account.id) }}">
+
+                        <input type="submit" class="btn btn-danger" value="Poista käyttäjä" />
+
+                    </form>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </li>
+
+
+    {% endfor %}
+</ul>
+
+{% endif %}
+{% endblock %}

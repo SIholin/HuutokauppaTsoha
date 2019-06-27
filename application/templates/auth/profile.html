@@ -1,52 +1,78 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<h1 class="display-2 text-center"> {{ account.username }}
-<p><small class="text-muted"> {{account.name}}</small></p></h1>
+<h1 class="display-2 text-center"> {{ account.username }}</h1>
+    <div class="container">
+        <div class="row justify-content-start">
+            <div class="col-3">
+                <p class="lead"> Koko nimi: {{account.name}}
+                </p>
 
-{% if current_user.is_authenticated and current_user.id == account.id %}
+</div>
+
+{% if account.is_admin() %}
+<div class="col-3">
+<div class="alert alert-primary text-center" role="alert">
+    ADMIN
+</div>
+</div>
+{% endif %}
+</div>
+<div class="row">
+    <div class="col">
+<p class="lead">
+    Sähköpostiosoite: {{ account.email }}
+
+
+  
+</p>
+</div>
+</div>
+</div>
+
+{% if current_user.is_authenticated and (current_user.id == account.id or current_user.is_admin())%}
 {{ error }}
 
 <form method="POST" action="{{ url_for('auth_profile', account_id=account.id) }}">
     <div class="form-group row">
-    <h1 class="display-6">Vaihda salasana</h1>
+        <h1 class="display-6">Vaihda salasana</h1>
     </div>
     <div class="form-group row">
         {{ form.password.label }}
         {{ form.password(class_="form-control", placeholder="Uusi salasana") }}
-            <ul>
+        <ul>
             {% for error in form.password.errors %}
-                <li>{{ error }}</li>
+            <li>{{ error }}</li>
             {% endfor %}
-            </ul>
+        </ul>
     </div>
     <div class="form-group row">
         {{ form.confirm.label }}
         {{ form.confirm(class_="form-control", placeholder="Toista uusi salasana") }}
-            <ul>
+        <ul>
             {% for error in form.confirm.errors %}
-                <li>{{ error }}</li>
+            <li>{{ error }}</li>
             {% endfor %}
-            </ul>
+        </ul>
     </div>
     <div class="form-group row">
-        <input type="submit" class="btn btn-primary" value="Vaihda salasana"/>  
+        <input type="submit" class="btn btn-primary" value="Vaihda salasana" />
     </div>
 </form>
 
 <form method="POST" action="{{ url_for('auth_delete', account_id=account.id) }}">
     <div class="form-group row">
-    <input type="submit" class="btn btn-danger" value="Poista käyttäjä!" />
+        <input type="submit" class="btn btn-danger" value="Poista käyttäjä!" />
     </div>
 </form>
 
 {% endif %}
 
 <h1 class="display-6">
-    <span style="color:blue;font-weight:bolder">{{ account.username }}n </span>tuotteet
+    <span style="color:blue;font-weight:bolder">{{ account.username }} </span>tuotteet
 </h1>
 
-    {% for product in products %}
+{% for product in products %}
 
 {% include "products/one.html" %}
 

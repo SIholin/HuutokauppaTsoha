@@ -11,6 +11,7 @@ class User(Base):
     username = db.Column(db.String(144), nullable=False)
     password = db.Column(db.String(144), nullable=False)
     email = db.Column(db.String(200), nullable=False)
+    role = db.Column(db.String(144), nullable=False)
 
     offers = db.relationship("Offer", backref='account', lazy=True)
     products = db.relationship("Product", backref='account', lazy=True)
@@ -34,7 +35,10 @@ class User(Base):
         return True
     
     def roles(self):
-        return ["ADMIN"]
+        return [self.role]
+    
+    def is_admin(self):
+        return self.role == "ADMIN"
 
     @staticmethod
     def find_how_many_products():
@@ -47,5 +51,48 @@ class User(Base):
         response = []
         for row in res:
             response.append({"id":row[0], "name":row[1], "amount":row[2]})
+
+        return response
+
+
+    @staticmethod
+    def find_price_max():
+        stmt = text("SELECT Account.id, Account.name, Max(Offer.price) FROM Account"
+                    " LEFT JOIN Offer ON Offer.account_id = Account.id"
+                    " GROUP BY Account.id")
+        
+        res = db.engine.execute(stmt)
+
+        response = []
+        for row in res:
+            response.append({"id":row[0], "name":row[1], "value":row[2]})
+
+        return response
+
+    @staticmethod
+    def find_offer_average():
+        stmt = text("SELECT Account.id, Account.name, AVG(Offer.price) FROM Account"
+                    " LEFT JOIN Offer ON Offer.account_id = Account.id"
+                    " GROUP BY Account.id")
+        
+        res = db.engine.execute(stmt)
+
+        response = []
+        for row in res:
+            response.append({"id":row[0], "name":row[1], "average":row[2]})
+
+        return response
+
+    @staticmethod
+    def find_offer_min():
+        stmt = text("SELECT Account.id, Account.name, Min(Offer.price) FROM Account"
+                    " LEFT JOIN Offer ON Offer.account_id = Account.id"
+                    " GROUP BY Account.id")
+        
+        res = db.engine.execute(stmt)
+
+        response = []
+        for row in res:
+            response.append({"id":row[0], "name":row[1], "value":row[2]})
 
         return response
