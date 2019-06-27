@@ -29,3 +29,12 @@ Toimintoja:
 ## Heroku
 
 [HuutokauppaTsoha](https://enigmatic-temple-77296.herokuapp.com/)
+
+Normaali käyttäjä
+```
+käyttäjätunnus: testaaja, salasana: salainen
+```
+Admin käyttäjä
+```
+käyttäjätunnus: admin, salasana: salaisuus
+```
