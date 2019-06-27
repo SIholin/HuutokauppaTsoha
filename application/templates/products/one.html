@@ -1,16 +1,16 @@
 <div class="card mb-3 text-center" style="width: 20rem;">
-        <div class="card-header">
-                Myyjä: {{ get_account(product.account_id).username }} -
-                {% if product.onSale %}
-                <span style="color:green"> KÄYNNISSÄ</span>
-                {% else %}
-                <span style="color:red"> PÄÄTTYNYT</span>
-                {% endif %} 
-        </div>
-        <div class="card-body">
-                
+    <div class="card-header">
+        Myyjä: {{ get_account(product.account_id).username }} -
+        {% if product.onSale %}
+        <span style="color:green"> KÄYNNISSÄ</span>
+        {% else %}
+        <span style="color:red"> PÄÄTTYNYT</span>
+        {% endif %}
+    </div>
+    <div class="card-body">
+
         <h4 class="card-title">
-                <a href="{{  url_for('product_index', product_id = product.id) }}"> {{product.name}} </a></h4>
+            <a href="{{  url_for('product_index', product_id = product.id) }}"> {{product.name}} </a></h4>
         <p>{{ product.description }}</p>
     </div>
-    </div>
+</div>

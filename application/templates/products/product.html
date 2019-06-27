@@ -20,33 +20,33 @@
             <div class="form-group row">
                 <form method="POST" action="{{ url_for('products_set_new_description', product_id=product.id) }}">
                     <div class="form-row align-items-center">
-                    <div class ="col-auto my-1">
-                    <input type="text" class="form-control" name="new_description" placeholder="Uusi kuvaus" />
+                        <div class="col-auto my-1">
+                            <input type="text" class="form-control" name="new_description" placeholder="Uusi kuvaus" />
+                        </div>
+                        <div class="col-auto my-1">
+                            <input type="submit" class="btn btn-primary" value="Vaihda kuvaus" />
+                        </div>
                     </div>
-                    <div class="col-auto my-1">
-                    <input type="submit" class="btn btn-primary" value="Vaihda kuvaus" />
-                    </div>
-                </div>
                 </form>
             </div>
             <div class="form-group row">
                 <form method="POST" action="{{ url_for('products_delete', product_id=product.id) }}">
-                        <div class="form-row align-items-center">    
-                    <div class="col-auto my-1">
-                   
-                        <input type="submit" class="btn btn-danger" value="Poista tuote!" />
+                    <div class="form-row align-items-center">
+                        <div class="col-auto my-1">
+
+                            <input type="submit" class="btn btn-danger" value="Poista tuote" />
                         </div>
                     </div>
-                    </form>
+                </form>
                 {% if product.onSale %}
                 <form method="POST" action="{{ url_for('products_end', product_id=product.id) }}">
-                       
+
                     <div class="col-auto my-1">
-                    <input type="submit" class="btn btn-warning" value="Lopeta huutokauppa" />
+                        <input type="submit" class="btn btn-warning" value="Lopeta huutokauppa" />
                     </div>
-                
+
                 </form>
-                
+
                 {% endif %}
             </div>
             <div class="form-group row">
@@ -61,7 +61,7 @@
                             </select>
                         </div>
                         <div class="col-auto my-1">
-                            <input type="submit" class="btn btn-primary" value="Lisää tuotteelle tagi" />
+                            <input type="submit" class="btn btn-primary" value="Lisää tuotteelle tägi" />
                         </div>
                     </div>
                 </form>
@@ -69,7 +69,7 @@
 
             {% if best_user == -1 %}
             <div class="alert alert-info" role="alert">
-                    Ei vielä tarjouksia
+                Ei vielä tarjouksia
             </div>
             {% else %}
             <div class="alert alert-success" role="alert">
@@ -90,37 +90,37 @@
             <p>
                 <form method="POST" action="{{ url_for('products_offer', product_id=product.id) }}">
                     <input type="number" class="form-control" name="offer" />
-                    <input type="submit" class="btn btn-primary" value="Tarjoa!" />
+                    <input type="submit" class="btn btn-primary" value="Tarjoa" />
                 </form>
             </p>
             {% endif %}
             <h4 class="text-center">
-                    Tagit
-                </h4>
-                <ul class="list-group">
-                    {% for tag in tags %}
-                    <li class="list-group-item">
-                        <a href="{{ url_for('tag_index', tag_id = tag.id) }}">{{ tag.name }}</a>
-                    </li>
-                    {% endfor %}
-                </ul>
+                Tagit
+            </h4>
+            <ul class="list-group">
+                {% for tag in tags %}
+                <li class="list-group-item">
+                    <a href="{{ url_for('tag_index', tag_id = tag.id) }}">{{ tag.name }}</a>
+                </li>
+                {% endfor %}
+            </ul>
 
         </div>
     </div>
     {% if current_user.is_authenticated %}
     <div class="card text-center">
-           <div class="card-header">
+        <div class="card-header">
             <span style="font-weight: bold">Tarjoukset:</span>
-            </div>
-            <ul class="list-group">
-                {% for offer in  get_offers(product.id) %}
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    {{ get_account(offer.account_id).username }}
-                    <span class="badge badge-primary badge-pill">{{ offer.price }}</span>
-                </li>
-                {%endfor%}
-            </ul>
-           
+        </div>
+        <ul class="list-group">
+            {% for offer in  get_offers(product.id) %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                {{ get_account(offer.account_id).username }}
+                <span class="badge badge-primary badge-pill">{{ offer.price }}</span>
+            </li>
+            {%endfor%}
+        </ul>
+
 
     </div>
     {% endif %}

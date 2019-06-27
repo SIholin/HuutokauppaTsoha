@@ -7,21 +7,21 @@
     <div class="form-group">
         {{ form.username.label }}
         {{ form.username(class_="form-control", placeholder="Käyttäjätunnus") }}
-            <ul>
+        <ul>
             {% for error in form.username.errors %}
-                <li>{{ error }}</li>
+            <li>{{ error }}</li>
             {% endfor %}
-            </ul>
+        </ul>
     </div>
     <div>
         {{ form.password.label }}
         {{ form.password(class_="form-control", placeholder="Salasana") }}
-            <ul>
+        <ul>
             {% for error in form.password.errors %}
-                <li>{{ error }}</li>
+            <li>{{ error }}</li>
             {% endfor %}
-            </ul>
+        </ul>
     </div>
-    <button type="submit" class="btn btn-primary">Kirjaudu</button>  
+    <button type="submit" class="btn btn-primary">Kirjaudu</button>
 </form>
 {% endblock %}

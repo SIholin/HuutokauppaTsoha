@@ -14,15 +14,15 @@
             <input type="text" class="form-control mb-2" name="name" id="inlineFormInput" placeholder="Hakusana">
         </div>
         <div class="col-auto">
-            <input type="submit" class="btn btn-primary mb-2" value="Hae"/>
+            <input type="submit" class="btn btn-primary mb-2" value="Hae" />
         </div>
     </div>
 </form>
 
-    {% for product in products %}
+{% for product in products %}
 
-        {% include "products/one.html" %}
+{% include "products/one.html" %}
 
-    {% endfor %}
-  
+{% endfor %}
+
 {% endblock %}

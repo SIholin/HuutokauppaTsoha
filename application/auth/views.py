@@ -52,24 +52,25 @@ def auth_register():
 
     return redirect(url_for("index"))
 
-#Näyttää käyttäjän profiilin
+#Näyttää käyttäjän profiilin ja vaihtaa salasanan
 @app.route("/auth/profile/<account_id>/", methods=["GET", "POST"])
 def auth_profile(account_id):
     u = User.query.get(account_id)
-    products = Product.query.filter(account_id == account_id)
+    products = Product.query.filter(Product.account_id == account_id)
+
     if request.method == "GET":
         return render_template("auth/profile.html", get_account = User.query.get, products = products, account = u, form = ModifyForm())
     
     form = ModifyForm(request.form)
 
     if not form.validate():
-        return render_template("auth/profile.html", form = form)
+        return render_template("auth/profile.html", get_account = User.query.get, products = products, account = u, form = form)
 
     u.password = form.password.data
     
     db.session().commit()
 
-    return redirect(url_for("auth_profile", account_id = account_id))
+    return render_template("auth/profile.html", e = 1, get_account = User.query.get, products = products, account = u, form = form)
 
 #Listaa käyttäjät
 @app.route("/auth/list/", methods=["GET"])

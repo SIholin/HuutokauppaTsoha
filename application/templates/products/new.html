@@ -1,24 +1,23 @@
-
 <h1>Tuotteen lisäys</h1>
 <form method="POST" action="{{ url_for('products_create') }}">
     {{ form.csrf_token }}
     <div class="form-group">
         {{ form.name.label }}
         {{ form.name(class_="form-control", placeholder="Nimi")}}
-            <ul>
+        <ul>
             {% for error in form.name.errors %}
-                <li>{{ error }}</li>
+            <li>{{ error }}</li>
             {% endfor %}
-            </ul>
+        </ul>
     </div>
     <div>
         {{ form.description.label }}
         {{ form.description(class_="form-control", placeholder="Kuvaus") }}
-            <ul>
+        <ul>
             {% for error in form.description.errors %}
-                <li>{{ error }}</li>
+            <li>{{ error }}</li>
             {% endfor %}
-            </ul>
+        </ul>
     </div>
-    <input type="submit" class="btn btn-primary" value="Lisää tuote"/>  
+    <input type="submit" class="btn btn-primary" value="Lisää tuote" />
 </form>

@@ -2,32 +2,32 @@
 
 {% block body %}
 <h1 class="display-2 text-center"> {{ account.username }}</h1>
-    <div class="container">
-        <div class="row justify-content-start">
-            <div class="col-3">
-                <p class="lead"> Koko nimi: {{account.name}}
-                </p>
+<div class="container">
+    <div class="row justify-content-start">
+        <div class="col-5">
+            <p class="lead"> Koko nimi: {{account.name}}
+            </p>
 
-</div>
+        </div>
 
-{% if account.is_admin() %}
-<div class="col-3">
-<div class="alert alert-primary text-center" role="alert">
-    ADMIN
-</div>
-</div>
-{% endif %}
-</div>
-<div class="row">
-    <div class="col">
-<p class="lead">
-    Sähköpostiosoite: {{ account.email }}
+        {% if account.is_admin() %}
+        <div class="col-3">
+            <div class="alert alert-primary text-center" role="alert">
+                ADMIN
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    <div class="row">
+        <div class="col">
+            <p class="lead">
+                Sähköpostiosoite: {{ account.email }}
 
 
-  
-</p>
-</div>
-</div>
+
+            </p>
+        </div>
+    </div>
 </div>
 
 {% if current_user.is_authenticated and (current_user.id == account.id or current_user.is_admin())%}
@@ -37,6 +37,13 @@
     <div class="form-group row">
         <h1 class="display-6">Vaihda salasana</h1>
     </div>
+    {% if e == 1 %}
+    <div class="form-group row">
+        <div class="alert alert-success text-center" role="alert">
+            <p class="lead"><small>Salasana vaihdettu onnistuneesti</small></p>
+        </div>
+    </div>
+    {% endif %}
     <div class="form-group row">
         {{ form.password.label }}
         {{ form.password(class_="form-control", placeholder="Uusi salasana") }}
@@ -62,11 +69,13 @@
 
 <form method="POST" action="{{ url_for('auth_delete', account_id=account.id) }}">
     <div class="form-group row">
-        <input type="submit" class="btn btn-danger" value="Poista käyttäjä!" />
+        <input type="submit" class="btn btn-danger" value="Poista käyttäjä" />
     </div>
 </form>
 
 {% endif %}
+
+{% if products is defined and products[0] is defined %}
 
 <h1 class="display-6">
     <span style="color:blue;font-weight:bolder">{{ account.username }} </span>tuotteet
@@ -77,5 +86,9 @@
 {% include "products/one.html" %}
 
 {% endfor %}
-
+{% else %}
+<div class="alert alert-info text-center" role="alert">
+    <p class="lead">Käyttäjällä ei ole tuotteita</p>
+</div>
+{% endif %}
 {% endblock %}
