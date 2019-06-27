@@ -37,7 +37,7 @@ WHERE product.name LIKE :word
 INSERT INTO account (name, username, password, email)
 VALUES (?, ?, ?, ?);
 ```
-## Rekisteröitynyt käyttäjä
+## Normaali käyttäjä
 
 **Kirjautuminen**
 + Valitse 'Kirjaudu'
@@ -115,6 +115,14 @@ INSERT INTO tagProduct (product_id, tag_id)
 VALUES (?, ?);
 ```
 
+**Käyttäjän poisto**
++ Valitse 'Käyttäjät'
++ Etsi listalta käyttäjä
++ Paina 'Poista'
+```SQL
+DELETE FROM account WHERE account.id = ?
+```
+
 **Uloskirjautuminen**
 + Valitse 'Kirjaudu ulos'
 
@@ -134,18 +142,10 @@ DELETE FROM tag WHERE tag.id = ?;
 SELECT * FROM account
 ```
 
-**Käyttäjän poisto**
-+ Valitse 'Käyttäjät'
-+ Etsi listalta käyttäjä
-+ Paina 'Poista'
-```SQL
-DELETE FROM account WHERE account.id = ?
-```
-
 **Käyttäjälle Admin oikeudet**
 + Valitse 'Käyttäjät'
 + Etsi listasta käyttäjä
 + Paina 'Tee käyttäjästä Admin'
 ```SQL
-UPDATE account SET role = ? WHERE account.id = ?
+UPDATE account SET role = 'ADMIN' WHERE account.id = ?
 ```
