@@ -2,7 +2,7 @@
 
 Huutokaupassa tuotteita voi laittaa myyntiin, jonka jälkeen muut voivat halutessaan tehdä huutoja tuotteesta. Tuotteen myyjä saa korkeimman tarjouksen tehneen käyttäjän sähköpostiosoitteen. Myyjä voi lopettaa huutokaupan kun haluaa, lisätä tägejä tuotteille, vaihtaa tuotteen kuvausta sekä poistaa tuotteen. Huutokaupassa on mahdollista listata tuotteet ja tagit. Tuotteita voi listata myös myyjä ja tagi kohtaisesti niiden omilla sivuilla. Tuotteita voi myös hakea nimen perusteella. Huutokaupassa on kolme eri käyttäjätyyppiä kirjautumaton, kirjautunut ja admin käyttäjä.
 
-Toimintoja:
+**Toimintoja:**
 + Rekisteröityminen
 + Kirjautuminen sisään ja ulos
 + Salasanan vaihto
