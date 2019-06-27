@@ -4,16 +4,19 @@ Huutokaupassa tuotteita voi laittaa myyntiin, jonka jälkeen muut voivat halutes
 
 Toimintoja:
 + Rekisteröityminen
-+ Kirjautuminen
++ Kirjautuminen sisään ja ulos
 + Salasanan vaihto
++ Käyttäjän poistaminen
++ Admin roolin lisääminen
 + Tuotteiden listaaminen
-+ Omien tuotteiden listaaminen
++ Yhden käyttäjän tuotteiden listaaminen
 + Tuotteiden haku nimen perusteella
 + Tuotteen luonti
 + Tuotteen poistaminen
 + Tuotteen kuvauksen päivitys
 + Tägin luonti
 + Tägin lisäys tuotteelle
++ Tuotteiden listaaminen tägin mukaan
 + Tarjouksen tekeminen
 + Huutokaupan päättäminen
 
