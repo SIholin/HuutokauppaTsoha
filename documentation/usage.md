@@ -71,7 +71,7 @@ WHERE product.account_id = account.id;
 + Paina nappia 'Lisää uusi tuote'
 ```SQL
 INSERT INTO product (name, description)
-VALUES (?, ?, ?);
+VALUES (?, ?);
 ```
 
 **Kuvauksen muutos**
@@ -102,6 +102,15 @@ DELETE FROM product WHERE product.id = ?;
 ```SQL
 INSERT INTO offer (price, account_id, product_id)
 VALUES (?, ?, ?);
+```
+
+**Tägin lisääminen**
++ Valitse 'Tagit'
++ Täytä vaaditut kentät
++ Paina 'Lisää tägi'
+```SQL
+INSERT INTO tag (name)
+VALUES (?)
 ```
 
 **Tagin lisääminen tuotteelle**
