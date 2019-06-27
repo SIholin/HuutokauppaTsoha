@@ -116,8 +116,8 @@ VALUES (?, ?);
 ```
 
 **Käyttäjän poisto**
-+ Valitse 'Käyttäjät'
-+ Etsi listalta käyttäjä
++ Valitse 'Oma profiili' tai Admin käyttäjänä valitse 'Käyttäjät'
++ Admin käyttäjänä etsi listalta käyttäjä
 + Paina 'Poista'
 ```SQL
 DELETE FROM account WHERE account.id = ?
